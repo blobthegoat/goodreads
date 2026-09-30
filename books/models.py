@@ -52,7 +52,7 @@ class Rating(models.Model):
     score = models.IntegerField(choices=get_scores, blank=False)
 
 class UserBookStatus(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users')
     book = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     class Status(models.TextChoices):
