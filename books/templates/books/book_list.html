@@ -1,0 +1,15 @@
+{% extends 'books/base.html' %}
+<ul>
+    {% for book in book_list %}
+    <li>
+        <a href="{% url 'books:book_detail' pk %}">{{book.title}}</a>
+        <p>
+            By
+            {% for author in book.authors %}
+            {{author}} 
+            {% endfor %}
+        </p>
+        <p>{{book.score_avg}}</p>
+    </li>
+    {% endfor %}
+</ul>

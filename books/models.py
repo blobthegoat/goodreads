@@ -29,7 +29,7 @@ class Book(models.Model):
         ('HIS', 'Historical Fiction'),
     ]
 
-    genre = models.CharField(choices=GENRES)
+    genre = models.Charfield(choices=GENRES)
 
     def __str__(self):
         return self.title
