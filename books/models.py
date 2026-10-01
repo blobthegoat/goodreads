@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from multiselectfield import MultiSelectField
 class CustomUser(AbstractUser):
     pass
 
@@ -29,7 +29,7 @@ class Book(models.Model):
         ('HIS', 'Historical Fiction'),
     ]
 
-    genre = models.Charfield(choices=GENRES)
+    genre = MultiSelectField(choices=GENRES)
 
     def __str__(self):
         return self.title
