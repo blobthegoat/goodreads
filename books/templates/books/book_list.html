@@ -5,9 +5,9 @@
     <li>
         <a href="{% url 'books:book_detail' book.pk %}">{{book.title}}</a>
         <p>
-            By
-            {% for author in book.authors %}
-            {{author}} 
+            By: 
+            {% for author in book.author.all %}
+            {{author}}{% if not forloop.last %},{% endif %}
             {% endfor %}
         </p>
         <p>{{book.score_avg}}</p>

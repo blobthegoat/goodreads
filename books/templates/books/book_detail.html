@@ -1,4 +1,19 @@
 {% extends 'books/base.html' %}
 {% block content %}
-{{book.title_long}}
+<h2>
+    {{book.title_long}}
+</h2>
+<h3>
+    {{book.description}}
+</h3>
+<h3>
+    Genres: {% for genre in book.genre %} {{genre}} {% endfor %}
+</h3>
+<h4>Reviews</h4>
+{% for review in reviews %}
+<h5>{{review.user}}: {{review.score}}</h5>
+<p>
+    {{review.body}}
+</p>
+{% endfor %}
 {% endblock %}

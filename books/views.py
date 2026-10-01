@@ -4,6 +4,7 @@ from django.views.generic import FormView, ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse, reverse_lazy
 from .models import Book, Author
+from django.views.generic.edit import FormMixin
 # Create your views here.
 
 class UserSignup(FormView):
@@ -22,6 +23,11 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
     model = Book
     template_name = 'books/book_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = Book.objects.get(pk=self.kwargs['pk']).rating_set.all()
+        return context
 
 class AuthorListView(ListView):
     model = Author

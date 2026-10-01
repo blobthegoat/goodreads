@@ -1,1 +1,6 @@
 {% extends 'books/base.html' %}
+{% block content %}
+<form action="post">{% csrf_token %}
+    {{form}}
+</form>
+{% endblock %}
