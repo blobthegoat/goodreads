@@ -37,9 +37,9 @@ class Book(models.Model):
     @property
     def score_avg(self):
         score_sum = 0
-        for rating in self.objects.get(self.pk).rating_set:
+        for rating in self.rating_set.all():
             score_sum += rating.score
-        score_avg = score_sum / len(self.objects.get(self.pk).rating_set)
+        score_avg = score_sum / len(self.rating_set.all()) if self.rating_set.all() else 0
         return score_avg
         
 def get_scores():
