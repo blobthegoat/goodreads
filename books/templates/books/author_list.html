@@ -1,3 +1,15 @@
 {% extends 'books/base.html' %}
 {% block content %}
+<ul>
+    {% for author in author_list %}
+    <li>
+        <a href="{{author.get_absolute_url}}">{{author}}</a>
+        <p>
+            {% if author.book_set %}
+            Highest rated book: {{author.highest_rated_book}} 
+            {% endif %}
+        </p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

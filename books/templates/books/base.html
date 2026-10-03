@@ -2,6 +2,15 @@
 <head><title>GOODREADS</title></head>
 <body>
 <h1><a href="{% url 'books:homepage' %}">GOODREADS</a></h1>
+<h2><a href="{% url 'books:author_list'%}">AUTHORS</a></h2> 
+    {% if user.is_authenticated %}<h1>HELLO {{user}} <a href="{% url 'books:profile' %}">YOUR PROFILE</a>
+    <form method="post" action="{% url 'books:logout' %}">
+        {% csrf_token %}
+        <button type="submit">logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'books:signup' %}"> SIGN UP</a> or <a href="{% url 'books:login' %}">LOG IN</a>
+    {% endif%}</h1>
 {% block content %}
 {% endblock %}
 </body>

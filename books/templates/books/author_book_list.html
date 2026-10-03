@@ -1,0 +1,10 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<ul>
+    {% for book in books_by_author %}
+    <li>
+        <a href='{{book.get_absolute_url}}'>{{book.title}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

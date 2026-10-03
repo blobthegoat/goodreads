@@ -7,11 +7,19 @@
     {{book.description}}
 </h3>
 <h3>
-    Genres: {% for genre in book.genre %} {{genre}} {% endfor %}
+    Genres: {% for genre in book.genre %} <a href="{% url 'books:genre_list' genre %}">{{genre}}</a> {% endfor %}
+</h3>
+<h3>Authors:
+    {% for author in book.author.all %}
+    <a href='{{author.get_absolute_url}}'>{{author}}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
 </h3>
 <h4>Reviews</h4>
+{% if request.user.is_authenticated %}
+<form method="post">{% csrf_token %}{{form}} <input type="submit" value="submit"> </form> {%endif%}
 {% for review in reviews %}
-<h5>{{review.user}}: {{review.score}}</h5>
+<h5>{{review.user}}</h5>
+<h5>rating: {{review.score}}</h5>
 <p>
     {{review.body}}
 </p>

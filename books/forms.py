@@ -8,7 +8,7 @@ class UserCreateForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'email']
 
 class ReviewForm(ModelForm):
-    class Meta():
+    class Meta:
         model = Rating
         fields = ['score', 'body']
     
