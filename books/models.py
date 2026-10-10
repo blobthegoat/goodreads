@@ -79,7 +79,7 @@ class Rating(models.Model):
     score = models.IntegerField(choices=get_scores, blank=False)
 
     class Meta:
-        constraints = models.UniqueConstraint(fields=['book', 'user'], name='unique_rating')
+        constraints = [models.UniqueConstraint(fields=['book', 'user'], name='unique_rating')]
 
 class UserBookStatus(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users')
