@@ -21,15 +21,9 @@ class Author(models.Model):
     @property
     def highest_rated_book(self):
         books = self.book_set
-        # if books:
-        #     highest_rated_book = books[0]
-        #     for book in books:
-        #         if book.score_avg > highest_rated_book.score_avg:
-        #             highest_rated_book = book
-        #     return highest_rated_book
-        # else:
-        #     return None
-        return books.aggregate(models.Max('score_avg'))
+        annotated_books = books.annotate(avg_score=models.Avg('rating__score')).order_by('-avg_score').exclude(avg_score=None)
+        return annotated_books.first()
+        
                 
         
         
@@ -67,7 +61,8 @@ class Book(models.Model):
         #     score_sum += rating.score
         # score_avg = score_sum / len(self.rating_set.all()) if self.rating_set.all() else 0
         # return score_avg
-        return self.rating_set.aggregate(models.Avg('score', default=0))
+        score_dict = self.rating_set.aggregate(models.Avg('score'))
+        return score_dict['score__avg']
         
 def get_scores():
     return {i: i for i in range(0,6)}
