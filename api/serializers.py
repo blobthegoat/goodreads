@@ -1,10 +1,10 @@
-from pickletools import read_long1
 
 from books.models import CustomUser, Book, Rating
 from rest_framework import serializers
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     reviews = serializers.HyperlinkedRelatedField(
+        source='rating_set',
         many=True,
         view_name='rating-detail',
         read_only=True
@@ -15,6 +15,7 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     reviews = serializers.HyperlinkedRelatedField(
+        source='rating_set',
         many=True,
         view_name='rating-detail',
         read_only=True
